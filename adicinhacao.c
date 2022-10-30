@@ -15,17 +15,24 @@ int main(int argc, char** argv) {
 	
 	for(int i = 1; i<=3; i++){
 		printf("\n Tentativa %d de 3\n", i);
+		
 		printf("\n Qual e  o seu chute? ");
 		scanf("%d", &chute);
 		
 		printf("\n Seu chute foi %d.", chute);
+	
 		int acertou = chute == numerosecreto;
+		
 			if(acertou){
 			printf("\n Parabens, voce ganhou");
+			break;
+			
+			
 			}
 		
 			else{
 			int maior = chute > numerosecreto;
+		
 			if(maior){
 			printf("\n Ops!!, voce errou!!");
 			printf("\n seu chute foi maior que o numero secreto");
@@ -37,7 +44,7 @@ int main(int argc, char** argv) {
 			}
 	}
 	
-
+	printf("\n FIM DE JOGO");
 	
 	
 
