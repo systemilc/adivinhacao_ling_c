@@ -1,54 +1,52 @@
-#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
+#define NUMERO_DE_TENTATIVAS 3
 
+int main() {
+    printf("************************************\n");
+    printf("* Bem vindo ao Jogo de Adivinhação *\n");
+    printf("************************************\n");
 
-int main(int argc, char** argv) {
-	
-	int numerosecreto = 50;
-	int chute;
-	
+    int chute;
+    int acertou = 0;
+    int tentativas = 1;
+    double pontos = 1000;
 
-	
-	printf("\n \n*********************************************");
-	printf("\n \n** Ola, seja bem vindo ao jogo de adivinha **");
-	printf("\n \n*********************************************");
-	
-	for(int i = 1; i<=3; i++){
-		printf("\n Tentativa %d de 3\n", i);
-		
-		printf("\n Qual e  o seu chute? ");
-		scanf("%d", &chute);
-		
-		printf("\n Seu chute foi %d.", chute);
-	
-		int acertou = chute == numerosecreto;
-		
-			if(acertou){
-			printf("\n Parabens, voce ganhou");
-			break;
-			
-			
-			}
-		
-			else{
-			int maior = chute > numerosecreto;
-		
-			if(maior){
-			printf("\n Ops!!, voce errou!!");
-			printf("\n seu chute foi maior que o numero secreto");
-			} else{
-			printf("\n Ops!!, voce errou!!");
-			printf("\n seu chute foi menor que o numero secreto ***");
-			}
-		
-			}
-	}
-	
-	printf("\n FIM DE JOGO");
-	
-	
+    srand(time(0));
+    int numerosecreto = rand() % 100;
 
-	
-	
-	return 0;
+    while(!acertou) {
+
+        printf("Qual é o seu %do. chute? ", tentativas);
+        scanf("%d", &chute);
+
+        if(chute < 0) {
+            printf("Você não pode chutar números negativos\n");
+            continue;
+        }
+
+        printf("Seu %do. chute foi %d\n", tentativas, chute);
+
+        acertou = chute == numerosecreto;
+        int maior = chute > numerosecreto;
+
+        if(acertou) {
+            printf("Parabéns! Você acertou!\n");
+        } else if(maior) {
+            printf("Seu chute foi maior do que o número secreto!\n");
+        } else {
+            printf("Seu chute foi menor do que o número secreto!\n");
+        }
+
+        tentativas++;
+
+        double pontosperdidos = abs(chute - numerosecreto) / 2.0;
+        pontos = pontos - pontosperdidos;
+    }
+
+    printf("Você fez %.2f pontos", pontos);
+    printf("\nObrigado por jogar!\n");
+
 }
